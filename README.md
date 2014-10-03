@@ -42,7 +42,7 @@ var reworkCalc = require('rework-calc');
 module.exports = {
   module: {
     loaders: [
-      {test: /\.css$/, loader: 'style-loader!rework-loader'}
+      {test: /\.css$/, loader: 'style-loader!rework-webpack-loader'}
       // ...
     ]
   },
@@ -65,7 +65,7 @@ and variables working correctly. so a full featured config might look like
 this:
 
 ```js
-var reworkLoader = require('rework-loader');
+var reworkLoader = require('rework-webpack-loader');
 var reworkVars = require('rework-vars');
 var reworkCalc = require('rework-calc');
 var reworkCustomMedia = require('rework-custom-media');
@@ -92,7 +92,7 @@ module.exports = {
 
   module: {
     loaders: [
-      {test: /\.css$/, loader: 'style-loader!rework-loader'}
+      {test: /\.css$/, loader: 'style-loader!rework-webpack-loader'}
       // ...
     ]
   },
