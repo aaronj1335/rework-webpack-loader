@@ -157,7 +157,39 @@ chance you'll want to re-use the first two in other apps. so you'll also have a 
 
 so your dependency tree looks something like this:
 
-![dependency tree][deptree]
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:se="http://svg-edit.googlecode.com">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Layer 1</title>
+  <polyline se:connector="svg_8 svg_2" fill="none" stroke-width="5" stroke="#000000" points="471.971 314.645 410.354 361.086 348.737 407.527" id="svg_22"/>
+  <polyline se:connector="svg_6 svg_2" fill="none" stroke-width="5" stroke="#000000" points="168.988 314.645 223.238 361.086 277.487 407.527" id="svg_21"/>
+  <polyline se:connector="svg_12 svg_8" fill="none" stroke-width="5" stroke="#000000" points="333.519 63.9627 410.354 160.746 487.189 257.529" id="svg_20"/>
+  <polyline se:connector="svg_12 svg_10" fill="none" stroke-width="5" stroke="#000000" points="274.101 63.9627 227.564 100.13 181.027 136.297" id="svg_19"/>
+  <polyline se:connector="svg_10 svg_6" fill="none" stroke-width="5" stroke="#000000" points="142.243 193.413 139.955 225.471 137.667 257.529" id="svg_18"/>
+  <g id="svg_23">
+   <g id="svg_13">
+    <rect id="svg_11" ry="8" rx="8" height="61.64313" width="270.39936" y="10.73126" x="174.56599" stroke-width="5" stroke="#000000" fill="#ffffff"/>
+    <text transform="matrix(2.1631946140146847,0,0,2.0547711776506925,-26.611113824234955,-13.925997974616845) " id="svg_12" xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="24" y="32" x="156" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">base.css</text>
+   </g>
+   <g id="svg_14">
+    <rect id="svg_9" ry="8" rx="8" height="61.64313" width="270.39936" y="140.18184" x="8" stroke-width="5" stroke="#000000" fill="#ffffff"/>
+    <text transform="matrix(2.1631946140146847,0,0,2.0547711776506925,-26.611113824234955,-13.925997974616845) " id="svg_10" xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="24" y="95" x="79" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">menu.css</text>
+   </g>
+   <g id="svg_15">
+    <rect ry="8" rx="8" id="svg_5" height="61.64313" width="244.44101" y="261.41334" x="8" stroke-width="5" stroke="#000000" fill="#ffffff"/>
+    <text transform="matrix(2.1631946140146847,0,0,2.0547711776506925,-26.611113824234955,-13.925997974616845) " id="svg_6" xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="24" y="154" x="75" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">menu.js</text>
+   </g>
+   <g id="svg_16">
+    <rect id="svg_7" ry="8" rx="8" height="61.64313" width="248.7674" y="261.41334" x="382.23267" stroke-width="5" stroke="#000000" fill="#ffffff"/>
+    <text transform="matrix(2.1631946140146847,0,0,2.0547711776506925,-26.611113824234955,-13.925997974616845) " id="svg_8" xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="24" y="154" x="248" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">app.css</text>
+   </g>
+   <g id="svg_17">
+    <rect ry="8" rx="8" id="svg_1" height="61.64313" width="205.50348" y="409.35686" x="207.0139" stroke-width="5" stroke="#000000" fill="#ffffff"/>
+    <text transform="matrix(2.1631946140146847,0,0,2.0547711776506925,-26.611113824234955,-13.925997974616845) " xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="24" id="svg_2" y="227" x="156" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">app.js</text>
+   </g>
+  </g>
+ </g>
+</svg>
 
 css preprocessors that don't treat each css file as a separate module will end
 up duplicating `base.css` in the final output. this includes the
