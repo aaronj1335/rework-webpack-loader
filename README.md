@@ -131,42 +131,41 @@ additions:
 ## motivation
 
 the default `css-loader` plugin wasn't enough for my needs because i wanted
-features like variables in my css
+features like css variables and [the `calc` method][calc].
 
-the existing `rework-loader` is suboptimal because it doesn't treat each css
-file as a separate webpack module, so you lose all of webpack's dependency
-tracking a.k.a. the big motivator for using a module system in the first place.
+the issue with the existing `rework-loader` is it doesn't treat each css file
+as a separate webpack module, so you lose all of webpack's dependency tracking
+(a.k.a. the big motivator for using a module system in the first place).
 
 ### why are separate modules so important?
 
-to illustrate the importance of treating each css file as a separate module,
 consider an app with 3 css files:
 
 - `base.css`: css reset and utility classes
-- `menu.css`: styles for a re-usable css drop-down menu component, which
-  `@import`'s `base.css` since it uses those utility classes
-- `app.css`: styles specific to this application which also `@import`'s
+- `menu.css`: styles for a re-usable css drop-down menu, which `@import`'s
+  `base.css` since it builds on those utility classes
+- `app.css`: styles specific to this application, which also `@import`'s
   `base.css` since the app needs the utility classes and reset
 
 
 while the last file is only ever going to be used for this app, there's a good
-chance you'll want to re-use the first two in other apps. so you'll also have a couple javascript modules:
+chance you'll want to re-use the first two in other apps. so you'll also have a
+couple javascript modules:
 
 - `menu.js`: a dropdown-menu javascript component which `require`'s `menu.css`
 - `app.js`: the rest of your app code, which presumably uses the menu component
 
-so your dependency tree looks something like this:
+your dependency tree looks something like this:
 
 ![dependency tree][deptree]
 
 css preprocessors that don't treat each css file as a separate module will end
 up duplicating `base.css` in the final output. this includes the
-`rework-loader`, `less-loader`, and most others that trace the `@import`
-statements in css for you. while they de-dupe the files internally, since
-`menu.css` and `app.css` are different entry points for these preprocessors,
-they have no way of knowing about the shared files. when they output the css to
-webpack, there is no good way of telling webpack which dependencies are
-included in the compiled module.
+`rework-loader`, `less-loader`, and any others that inline `@import`
+statements. while they de-dupe the files during the build, since `menu.css` and
+`app.css` are different entry points, the preprocessor has no way of knowing
+about the shared files. when they output the css to webpack, there is no simple
+way of telling webpack which dependencies are included in the compiled module.
 
 you also have the development-time annoyance that since webpack doesn't see
 these dependencies, making a change to `base.css` won't trigger a
@@ -179,8 +178,8 @@ source, but not trace the dependencies in the preprocessor. this could be done
 in less by [using a `.css` extension in the `@import` statements](lessimport)
 or in rework by not including [the import plugin][reworkimport].
 
-now the problem is resolving variables. css variables are also hard to resolve
-at build time since they kind of have 2-way dependencies:
+now the problem becomes resolving variables. variables are especially hard to
+resolve at build time since they have a sort of cyclic dependency:
 
 - `base.css` might define a `--base-font` variable and use it to set the
   default font for the app (like in [SUIT CSS][suitbase], for example)
@@ -200,6 +199,29 @@ to resolve variables during compilation. the downside is that if you change
 variable values, you need to restart the webpack dev server, but the upside is
 that it handles css variables' cyclic dependencies.
 
+### why couldn't you re-use the default `css-loader`?
+
+to avoid an extra parse of the css. a little background on how webpack makes
+css work by default:
+
+- the default `css-loader` transforms css to a javascript module that:
+  - `require`'s all of the things the css `@import`'ed
+  - rewrites url's to the webpack output's chunk name
+    - url's are treated as relative to the css file's location
+    - if they reference, say, an image, the final css will reference webpack's
+      name for the image, which is a content hash
+      - this enables long term caching of images, fonts, etc.
+  - returns a string of css
+- the `style-loader` takes the name of a webpack module that returns a string,
+  and creates a module that inserts a `<style>` element into the document with
+  the css string as its content
+
+if we re-use `css-loader` we're parsing/stringifying the css twice. admittedly
+this is kind of a weak reason. especially since, if you want to add something
+like [`autoprefixer`][autoprefixer], you're going to have to parse the css
+again anyway. you're probably better off optimizing the development build by
+focusing on incrementally building small modules anyway.
+
 [loader]: http://webpack.github.io/docs/using-loaders.html
 [webpack]: http://webpack.github.io
 [rework]: https://github.com/reworkcss/rework
@@ -215,3 +237,5 @@ that it handles css variables' cyclic dependencies.
 [reworkimport]: https://github.com/reworkcss/rework-import
 [suitbase]: https://github.com/suitcss/base/blob/5c8886c4441cdfbf1b28d9ae9810ba907f2a193c/lib/base.css#L4
 [caniusecssvars]: http://caniuse.com/#feat=css-variables
+[calc]: https://developer.mozilla.org/en-US/docs/Web/CSS/calc
+[autoprefixer]: https://github.com/postcss/autoprefixer
