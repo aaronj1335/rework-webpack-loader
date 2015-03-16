@@ -27,7 +27,7 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.css$/, loader: 'style-loader!rework-webpack-loader'},
-      {test: /\.((png)|(eot)|(woff)|(ttf)|(svg))$/, loader: 'file-loader'}
+      {test: /\.((png)|(eot)|(woff)|(ttf)|(svg)|(gif))$/, loader: 'file-loader'}
     ]
   },
 

@@ -6,6 +6,9 @@ module.exports = function() {
   var nonEmptyStyles = styles.filter(function(style) {
     return style.textContent.replace(/\s/g, '').length;
   });
+  var styleText = nonEmptyStyles.map(function(style) {
+    return style.textContent;
+  }).join('\n');
 
   if (qsa('.Main').length != 1)
     throw new Error('expected a .Main element');
@@ -21,4 +24,7 @@ module.exports = function() {
 
     return styleSet;
   }, {});
+
+  if (/aww-yiss/.test(styleText))
+    throw new Error('media queries were not traversed');
 };
