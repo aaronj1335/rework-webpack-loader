@@ -1,5 +1,7 @@
 # rework webpack loader
 
+<img src="https://travis-ci.org/aaronj1335/rework-webpack-loader.svg" />
+
 this is a [loader][] for [webpack][] that allows you to create css modules and
 process them with [rework][].
 
