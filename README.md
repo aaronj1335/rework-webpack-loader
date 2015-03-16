@@ -1,6 +1,13 @@
 # rework webpack loader
 
-<img src="https://travis-ci.org/aaronj1335/rework-webpack-loader.svg" />
+***IMPORTANT:*** i would really recommend using
+[`webpack-postcss-tools`][webpack-postcss-tools] instead of this loader. it's
+build on [`css-loader`][css-loader], so it's more stable, plus postcss seems to be a more
+active project than rework at this point.
+
+<a href="https://travis-ci.org/aaronj1335/rework-webpack-loader">
+  <img src="https://travis-ci.org/aaronj1335/rework-webpack-loader.svg" />
+</a>
 
 this is a [loader][] for [webpack][] that allows you to create css modules and
 process them with [rework][].
@@ -241,3 +248,4 @@ focusing on incrementally building small modules anyway.
 [caniusecssvars]: http://caniuse.com/#feat=css-variables
 [calc]: https://developer.mozilla.org/en-US/docs/Web/CSS/calc
 [autoprefixer]: https://github.com/postcss/autoprefixer
+[webpack-postcss-tools]: https://github.com/aaronj1335/webpack-postcss-tools
